@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->unsignedInteger('harga');
             $table->text('deskripsi');
-            $table->foreignId('satuan_id')->constrained();
+            $table->foreignId('satuan_id')->constrained('satuan');
             $table->timestamps();
         });
     }

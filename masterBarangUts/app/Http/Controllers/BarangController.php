@@ -32,7 +32,6 @@ class BarangController extends Controller
     {
         $messages = [
             'required' => 'Attribute harus diisi.',
-            'code' => 'Isi attribute dengan format yang benar',
             'numeric' => 'Isi attribute dengan angka',
         ];
         $validator = Validator::make($request->all(), [
@@ -85,10 +84,10 @@ class BarangController extends Controller
             'numeric' => 'Isi attribute dengan angka'
         ];
         $validator = Validator::make($request->all(), [
-            'code' => 'required|unique',
+            'code' => 'required',
             'name' => 'required',
-            'harga' => 'required|unsignedInteger',
-            'deskripsi' => 'required|text',
+            'harga' => 'required|numeric',
+            'deskripsi' => 'required',
         ], $messages);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -101,7 +100,7 @@ class BarangController extends Controller
         $barang->deskripsi = $request->deskripsi;
         $barang->satuan_id = $request->satuan;
         $barang->save();
-        return redirect()->route('employees.index');
+        return redirect()->route('barangs.index');
 
     }
     public function destroy(string $id)
